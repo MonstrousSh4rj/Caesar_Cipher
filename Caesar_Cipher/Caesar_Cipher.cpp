@@ -2,8 +2,10 @@
 #include<cstring>
 using namespace std;
 void user_input(char text[], int& shift);
+void user_input_brute(char text[]);
 int encryption(char text[], int shift);
 int decryption(char text[], int shift);
+void brute_force(char text[]);
 void display(char text[]);
 int main()
 {
@@ -48,7 +50,11 @@ int main()
     }
     case 3:
     {
-
+        char text[100];
+        int shift;
+        user_input_brute(text);
+        brute_force(text);
+        break;
     }
     case 4:
     {
@@ -125,11 +131,58 @@ int decryption(char text[], int shift)
     }
     return text[100];
 }
-void display(int text[])
+void display(char text[])
 {
-    for (int c = 0; text[c] < '\0'; c++)
+    for (int c = 0; text[c] != '\0'; c++)
     {
         cout << text[c];
     }
     cout << endl;
+}
+void brute_force(char text[])
+{
+    int count = 1;
+    for(count=1; count<=25; count++)
+    {
+        for (int a = 0; text[a] != '\0'; a++)
+        {
+            if (text[a] >= 65 && text[a] <= 90)
+            {
+                text[a] = (text[a] - 'A' - count +26) % 26 + 'A';
+            }
+            else if (text[a] == ' ')
+            {
+                text[a] = text[a];
+            }
+            else if (text[a] >= 97 && text[a] <= 122)
+            {
+                text[a] = (text[a] - 'a' - count +26) % 26 + 'a';
+            }
+        }
+        cout << "With Shift " << count << ": " << endl;
+        for (int e = 0; text[e] != '\0'; e++)
+        {
+            cout << text[e];
+        }
+        cout << endl;
+    }
+}
+void user_input_brute(char text[])
+{
+    cin.ignore();
+    bool valid = 1;
+    do
+    {
+        cout << "Please Enter your text: ";
+        cin.getline(text, 100);
+        for (int b = 0; text[b] != '\0'; b++)
+        {
+            if (!(text[b] >= 'A' && text[b] <= 'Z') && !(text[b] >= 'a' && text[b] <= 'z') && text[b] != ' ')
+            {
+                cout << "Invalid! Letters only." << endl;
+                valid = 0;
+                break;
+            }
+        }
+    } while (valid == 0);
 }
