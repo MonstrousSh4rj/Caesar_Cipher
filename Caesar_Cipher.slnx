@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="Caesar_Cipher/Caesar_Cipher.vcxproj" />
+  <Project Path="Caesar_Cipher/Caesar_Cipher.vcxproj" Id="5a966e72-e430-4e90-a8e7-ccbe64df05eb" />
 </Solution>
