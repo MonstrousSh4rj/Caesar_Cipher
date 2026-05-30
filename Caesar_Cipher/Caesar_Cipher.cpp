@@ -12,56 +12,58 @@ int main()
     int choice;
     do
     {
-        cout << "========================================" << endl;
-        cout << "        CAESAR CIPHER PROGRAM          " << endl;
-        cout << "========================================" << endl;
-        cout << "  1. Encrypt                           " << endl;
-        cout << "  2. Decrypt                           " << endl;
-        cout << "  3. Brute Force                       " << endl;
-        cout << "  4. Exit                              " << endl;
-        cout << "========================================" << endl;
-        cout << "Enter your choice: ";
-        cin >> choice;
-        if (choice < 1 || choice > 4)
+        do
         {
-            cout << "Invalid choice! Try again." << endl;
+            cout << "========================================" << endl;
+            cout << "        CAESAR CIPHER PROGRAM          " << endl;
+            cout << "========================================" << endl;
+            cout << "  1. Encrypt                           " << endl;
+            cout << "  2. Decrypt                           " << endl;
+            cout << "  3. Brute Force                       " << endl;
+            cout << "  4. Exit                              " << endl;
+            cout << "========================================" << endl;
+            cout << "Enter your choice: ";
+            cin >> choice;
+            if (choice < 1 || choice > 4)
+            {
+                cout << "Invalid choice! Try again." << endl;
+            }
+        } while (choice < 1 || choice > 4);
+        switch (choice)
+        {
+        case 1:
+        {
+            char text[100];
+            int shift;
+            user_input(text, shift);
+            encryption(text, shift);
+            display(text);
+            break;
         }
-    } 
-    while (choice < 1 || choice > 4);
-    switch (choice)
-    {
-    case 1:
-    {
-        char text[100];
-        int shift;
-        user_input(text, shift);
-        encryption(text, shift);
-        display(text);
-        break;
-    }
-    case 2:
-    {
-        char text[100];
-        int shift;
-        user_input(text, shift);
-        decryption(text, shift);
-        display(text);
-        break;
-    }
-    case 3:
-    {
-        char text[100];
-        int shift;
-        user_input_brute(text);
-        brute_force(text);
-        break;
-    }
-    case 4:
-    {
-        cout << "Program Exited Successfully!";
-        return 0;
-    }
-    }
+        case 2:
+        {
+            char text[100];
+            int shift;
+            user_input(text, shift);
+            decryption(text, shift);
+            display(text);
+            break;
+        }
+        case 3:
+        {
+            char text[100];
+            int shift;
+            user_input_brute(text);
+            brute_force(text);
+            break;
+        }
+        case 4:
+        {
+            cout << "Program Exited Successfully!";
+            return 0;
+        }
+        }
+    } while (choice != 4);
 }
 void user_input(char text[], int& shift)
 {
