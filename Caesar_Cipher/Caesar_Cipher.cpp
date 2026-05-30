@@ -2,7 +2,9 @@
 #include<cstring>
 using namespace std;
 void user_input(char text[], int& shift);
-void encryption(char text[], int shift);
+int encryption(char text[], int shift);
+int decryption(char text[], int shift);
+void display(char text[]);
 int main()
 {
     int choice;
@@ -32,11 +34,17 @@ int main()
         int shift;
         user_input(text, shift);
         encryption(text, shift);
+        display(text);
         break;
     }
     case 2:
     {
-
+        char text[100];
+        int shift;
+        user_input(text, shift);
+        decryption(text, shift);
+        display(text);
+        break;
     }
     case 3:
     {
@@ -44,6 +52,7 @@ int main()
     }
     case 4:
     {
+        cout << "Program Exited Successfully!";
         return 0;
     }
     }
@@ -78,7 +87,7 @@ void user_input(char text[], int& shift)
     } 
     while (shift < 1 || shift > 25);
 } 
-void encryption(char text[], int shift)
+int encryption(char text[], int shift)
 {
     for (int a = 0; text[a] != '\0'; a++)
     {
@@ -95,10 +104,32 @@ void encryption(char text[], int shift)
             text[a] = (text[a] - 'a' + shift) % 26 + 'a';
         }
     }
-    cout << "Encrypted Text: ";
-        for (int a = 0; text[a] != '\0'; a++)
+    return text[100];
+}
+int decryption(char text[], int shift)
+{
+    for (int a = 0; text[a] != '\0'; a++)
+    {
+        if (text[a] >= 65 && text[a] <= 90)
         {
-            cout << text[a];
+            text[a] = (text[a] - 'A' - shift) % 26 + 'A';
         }
-        cout << endl;
+        else if (text[a] == ' ')
+        {
+            text[a] = text[a];
+        }
+        else if (text[a] >= 97 && text[a] <= 122)
+        {
+            text[a] = (text[a] - 'a' - shift) % 26 + 'a';
+        }
+    }
+    return text[100];
+}
+void display(int text[])
+{
+    for (int c = 0; text[c] < '\0'; c++)
+    {
+        cout << text[c];
+    }
+    cout << endl;
 }
