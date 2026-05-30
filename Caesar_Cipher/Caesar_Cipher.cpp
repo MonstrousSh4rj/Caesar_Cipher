@@ -24,10 +24,28 @@ int main()
         }
     } 
     while (choice < 1 || choice > 4);
-	char text[100];
-	int shift;
-	user_input(text, shift);
-    encryption(text, shift);
+    switch (choice)
+    {
+    case 1:
+    {
+        char text[100];
+        int shift;
+        user_input(text, shift);
+        encryption(text, shift);
+    }
+    case 2:
+    {
+
+    }
+    case 3:
+    {
+
+    }
+    case 4:
+    {
+        return 0;
+    }
+    }
 }
 void user_input(char text[], int& shift)
 {
@@ -48,8 +66,10 @@ void encryption(char text[], int shift)
         else
             text[a] = (text[a] - 'a' + shift) % 26 + 'a';
     }
+    cout << "Encrypted Text:   ";
         for (int a = 0; text[a] != '\0'; a++)
         {
             cout << text[a];
         }
+        cout << endl;
 }
