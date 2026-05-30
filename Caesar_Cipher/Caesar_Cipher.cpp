@@ -32,6 +32,7 @@ int main()
         int shift;
         user_input(text, shift);
         encryption(text, shift);
+        break;
     }
     case 2:
     {
@@ -50,23 +51,51 @@ int main()
 void user_input(char text[], int& shift)
 {
     cin.ignore();
-    cout << "Please Enter your text: ";
-    cin.getline(text, 100);
-    cout << "Please Enter number to shift: ";
-    cin >> shift;
-}
+    bool valid = 1;
+    do
+    {
+        cout << "Please Enter your text: ";
+        cin.getline(text, 100);
+        for (int b = 0; text[b] != '\0'; b++)
+        {
+            if (!(text[b] >= 'A' && text[b] <= 'Z') && !(text[b] >= 'a' && text[b] <= 'z') && text[b]!=' ')
+            {
+                cout << "Invalid! Letters only." << endl;
+                valid = 0;
+                break;
+            }
+        }
+    }
+    while (valid == 0);
+    do
+    {
+        cout << "Please Enter number to shift: ";
+        cin >> shift;
+        if (shift < 1 || shift > 25)
+        {
+            cout << "Invalid! Enter between 1 and 25." << endl;
+        }
+    } 
+    while (shift < 1 || shift > 25);
+} 
 void encryption(char text[], int shift)
 {
     for (int a = 0; text[a] != '\0'; a++)
     {
-        if (text[a] > 65 && text[a] < 90)
+        if (text[a] >= 65 && text[a] <= 90)
         {
             text[a] = (text[a] - 'A' + shift) % 26 + 'A';
         }
-        else
+        else if (text[a] == ' ')
+        {
+            text[a] = text[a];
+        }
+        else if (text[a] >= 97 && text[a] <= 122)
+        {
             text[a] = (text[a] - 'a' + shift) % 26 + 'a';
+        }
     }
-    cout << "Encrypted Text:   ";
+    cout << "Encrypted Text: ";
         for (int a = 0; text[a] != '\0'; a++)
         {
             cout << text[a];
