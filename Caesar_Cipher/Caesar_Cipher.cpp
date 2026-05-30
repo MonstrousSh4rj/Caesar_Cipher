@@ -144,25 +144,27 @@ void brute_force(char text[])
     int count = 1;
     for(count=1; count<=25; count++)
     {
-        for (int a = 0; text[a] != '\0'; a++)
+        char temp[100];
+        strcpy_s(temp, text);
+        for (int a = 0; temp[a] != '\0'; a++)
         {
-            if (text[a] >= 65 && text[a] <= 90)
+            if (temp[a] >= 65 && temp[a] <= 90)
             {
-                text[a] = (text[a] - 'A' - count +26) % 26 + 'A';
+                temp[a] = (temp[a] - 'A' - count +26) % 26 + 'A';
             }
-            else if (text[a] == ' ')
+            else if (temp[a] == ' ')
             {
-                text[a] = text[a];
+                temp[a] = temp[a];
             }
-            else if (text[a] >= 97 && text[a] <= 122)
+            else if (temp[a] >= 97 && temp[a] <= 122)
             {
-                text[a] = (text[a] - 'a' - count +26) % 26 + 'a';
+                temp[a] = (temp[a] - 'a' - count +26) % 26 + 'a';
             }
         }
         cout << "With Shift " << count << ": " << endl;
-        for (int e = 0; text[e] != '\0'; e++)
+        for (int e = 0; temp[e] != '\0'; e++)
         {
-            cout << text[e];
+            cout << temp[e];
         }
         cout << endl;
     }
