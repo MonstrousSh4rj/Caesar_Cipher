@@ -24,8 +24,10 @@ int main()
             cout << "========================================" << endl;
             cout << "Enter your choice: ";
             cin >> choice;
-            if (choice < 1 || choice > 4)
-            {
+            if ((choice < 1 || choice > 4) || cin.fail() )
+             {
+                cin.clear();
+                cin.ignore(1000, '\n');
                 cout << "Invalid choice! Try again." << endl;
             }
         } while (choice < 1 || choice > 4);
