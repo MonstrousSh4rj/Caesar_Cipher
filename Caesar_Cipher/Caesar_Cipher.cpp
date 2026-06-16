@@ -90,31 +90,21 @@ int main()
 void user_input(char text[], int& shift)
 {
     cin.ignore();
-    bool valid = 1;
-    do
-    {
-        cout << "Please Enter your text: ";
-        cin.getline(text, 100);
-        for (int b = 0; text[b] != '\0'; b++)
-        {
-            if (!(text[b] >= 'A' && text[b] <= 'Z') && !(text[b] >= 'a' && text[b] <= 'z') && text[b] != ' ')
-            {
-                cout << "Invalid! Letters only." << endl;
-                valid = 0;
-                break;
-            }
-        }
-    } while (valid == 0);
+    cout << "Please Enter your text: ";
+    cin.getline(text, 100);
     do
     {
         cout << "Please Enter number to shift: ";
         cin >> shift;
-        if (shift < 1 || shift > 25)
+        if (shift < 1 || shift > 25 || cin.fail())
         {
+            cin.clear();
+            cin.ignore(1000, '\n');
             cout << "Invalid! Enter between 1 and 25." << endl;
         }
     } while (shift < 1 || shift > 25);
 }
+
 int encryption(char text[], int shift)
 {
     for (int a = 0; text[a] != '\0'; a++)
@@ -123,17 +113,14 @@ int encryption(char text[], int shift)
         {
             text[a] = (text[a] - 'A' + shift) % 26 + 'A';
         }
-        else if (text[a] == ' ')
-        {
-            text[a] = text[a];
-        }
         else if (text[a] >= 97 && text[a] <= 122)
         {
             text[a] = (text[a] - 'a' + shift) % 26 + 'a';
         }
     }
-    return text[100];
+    return 0;
 }
+
 int decryption(char text[], int shift)
 {
     for (int a = 0; text[a] != '\0'; a++)
@@ -142,17 +129,14 @@ int decryption(char text[], int shift)
         {
             text[a] = (text[a] - 'A' - shift + 26) % 26 + 'A';
         }
-        else if (text[a] == ' ')
-        {
-            text[a] = text[a];
-        }
         else if (text[a] >= 97 && text[a] <= 122)
         {
             text[a] = (text[a] - 'a' - shift + 26) % 26 + 'a';
         }
     }
-    return text[100];
+    return 0;
 }
+
 void display(char text[])
 {
     for (int c = 0; text[c] != '\0'; c++)
@@ -161,6 +145,7 @@ void display(char text[])
     }
     cout << endl;
 }
+
 void brute_force(char text[])
 {
     int count = 1;
@@ -173,10 +158,6 @@ void brute_force(char text[])
             if (temp[a] >= 65 && temp[a] <= 90)
             {
                 temp[a] = (temp[a] - 'A' - count + 26) % 26 + 'A';
-            }
-            else if (temp[a] == ' ')
-            {
-                temp[a] = temp[a];
             }
             else if (temp[a] >= 97 && temp[a] <= 122)
             {
@@ -194,22 +175,10 @@ void brute_force(char text[])
 void user_input_brute(char text[])
 {
     cin.ignore();
-    bool valid = 1;
-    do
-    {
-        cout << "Please Enter your text: ";
-        cin.getline(text, 100);
-        for (int b = 0; text[b] != '\0'; b++)
-        {
-            if (!(text[b] >= 'A' && text[b] <= 'Z') && !(text[b] >= 'a' && text[b] <= 'z') && text[b] != ' ')
-            {
-                cout << "Invalid! Letters only." << endl;
-                valid = 0;
-                break;
-            }
-        }
-    } while (valid == 0);
+    cout << "Please Enter your text: ";
+    cin.getline(text, 100);
 }
+
 string encrypt_string(const string& text, int shift)
 {
     string result = text;
@@ -222,6 +191,7 @@ string encrypt_string(const string& text, int shift)
     }
     return result;
 }
+
 string decrypt_string(const string& text, int shift)
 {
     string result = text;
@@ -290,6 +260,7 @@ void decrypt_file(int shift)
     outFile.close();
     cout << "Decrypted file saved to: " << outputFile << endl;
 }
+
 int file_shift()
 {
     int shift;
